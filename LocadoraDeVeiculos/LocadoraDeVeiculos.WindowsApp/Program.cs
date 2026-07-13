@@ -1,10 +1,12 @@
-﻿using LocadoraDeVeiculos.WindowsApp.Features.Login;
+﻿using Autofac;
+using LocadoraDeVeiculos.WindowsApp.Features.Login;
 using System;
 using LocadoraDeVeiculos.Infra.EntityFramework;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using LocadoraDeVeiculos.Infra.Logs;
+using LocadoraDeVeiculos.WindowsApp.Shared;
 
 namespace LocadoraDeVeiculos.WindowsApp
 {
@@ -18,12 +20,12 @@ namespace LocadoraDeVeiculos.WindowsApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LocadoraDeVeiculosDBContext db = new ();
+            LocadoraDeVeiculosDBContext db = new();
             GeradorLog.ConfigurarLog();
             var pendingChanges = db.Database.GetPendingMigrations();
             if (pendingChanges.Any())
                 db.Database.Migrate();
-            Application.Run(new TelaLogin());
+            Application.Run(AutoFac.Container.Resolve<TelaLogin>());
         }
     }
 }
