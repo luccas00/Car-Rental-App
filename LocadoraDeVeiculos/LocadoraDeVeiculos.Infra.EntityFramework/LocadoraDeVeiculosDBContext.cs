@@ -64,5 +64,6 @@ namespace LocadoraDeVeiculos.Infra.EntityFramework
                 .Build();
             return config;
         }
+
     }
 }
