@@ -1,0 +1,67 @@
+name: CI - Build and Tests
+
+on:
+  pull_request:
+    branches:
+      - DEV
+      - main
+
+  push:
+    branches:
+      - DEV
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and automated tests
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Setup .NET 5
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "5.0.x"
+
+      - name: Restore Windows application
+        run: >
+          dotnet restore
+          LocadoraDeVeiculos/LocadoraDeVeiculos.WindowsApp/LocadoraDeVeiculos.WindowsApp.csproj
+
+      - name: Build Windows application
+        run: >
+          dotnet build
+          LocadoraDeVeiculos/LocadoraDeVeiculos.WindowsApp/LocadoraDeVeiculos.WindowsApp.csproj
+          --configuration Release
+          --no-restore
+
+      - name: Run unit tests
+        run: >
+          dotnet test
+          LocadoraDeVeiculos/LocadoraDeVeiculos.UnitTests/LocadoraDeVeiculos.UnitTests.csproj
+          --configuration Release
+          --logger "trx;LogFileName=unit-tests.trx"
+          --results-directory TestResults/UnitTests
+
+      - name: Run application tests
+        run: >
+          dotnet test
+          LocadoraDeVeiculos/LocadoraDeVeiculos.ApplicationTests/LocadoraDeVeiculos.ApplicationTests.csproj
+          --configuration Release
+          --logger "trx;LogFileName=application-tests.trx"
+          --results-directory TestResults/ApplicationTests
+
+      - name: Publish test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automated-test-results
+          path: TestResults
+          if-no-files-found: warn
