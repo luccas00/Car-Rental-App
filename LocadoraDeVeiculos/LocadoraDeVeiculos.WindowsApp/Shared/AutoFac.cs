@@ -23,6 +23,7 @@ using LocadoraDeVeiculos.WindowsApp.Features.Cupons;
 using LocadoraDeVeiculos.WindowsApp.Features.Devolucoes;
 using LocadoraDeVeiculos.WindowsApp.Features.Funcionarios;
 using LocadoraDeVeiculos.WindowsApp.Features.GrupoDeVeiculos;
+using LocadoraDeVeiculos.WindowsApp.Features.Login;
 using LocadoraDeVeiculos.WindowsApp.Features.Locacoes;
 using LocadoraDeVeiculos.WindowsApp.Features.Parceiros;
 using LocadoraDeVeiculos.WindowsApp.Features.Servicos;
@@ -45,7 +46,15 @@ namespace LocadoraDeVeiculos.WindowsApp.Shared
 
             ConfigurarOperacoes();
 
+            ConfigurarForms();
+
             Container = Builder.Build();
+        }
+
+        private static void ConfigurarForms()
+        {
+            Builder.RegisterType<TelaLogin>().InstancePerDependency();
+            Builder.RegisterType<TelaPrincipalForm>().InstancePerDependency();
         }
 
         private static void ConfigurarOperacoes()

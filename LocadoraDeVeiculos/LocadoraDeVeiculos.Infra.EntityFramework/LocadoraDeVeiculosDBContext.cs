@@ -35,7 +35,7 @@ namespace LocadoraDeVeiculos.Infra.EntityFramework
         {
             optionsBuilder
                 .UseLoggerFactory(loggerFactoryConsole)
-                .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBLocadoraDeVeiculosORM;Integrated Security=True");
+                .UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=DBLocadoraDeVeiculosORM;Integrated Security=True");
 
             //var config = InitConfiguration();
             //connectionString = config.GetSection("ConnectionStrings").GetSection("SqlServerORM").Value;
@@ -64,5 +64,6 @@ namespace LocadoraDeVeiculos.Infra.EntityFramework
                 .Build();
             return config;
         }
+
     }
 }
