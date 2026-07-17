@@ -41,6 +41,9 @@ A tela de login criava manualmente o DbContext, repositórios e serviços de apl
 | #5 | `docs(quality): document patterns and code smells` | https://github.com/luccas00/Car-Rental-App/pull/5 |
 | #6 | `docs: complete project contribution documentation` | https://github.com/luccas00/Car-Rental-App/pull/6 |
 | #7 | `test(di): add Autofac integration tests` | https://github.com/luccas00/Car-Rental-App/pull/7 |
+| #8 | `release: merge DEV into main` — PR encerrado e substituído | https://github.com/luccas00/Car-Rental-App/pull/8 |
+| #9 | `release: merge DEV into main` | https://github.com/luccas00/Car-Rental-App/pull/9 |
+| Original #230 | `refactor(login): resolve dependencies with Autofac` | https://github.com/Matrix-Developers/Car-Rental-App/pull/230 |
 
 ## Estratégia de Branches
 
