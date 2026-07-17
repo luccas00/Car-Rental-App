@@ -32,12 +32,15 @@ A tela de login criava manualmente o DbContext, repositórios e serviços de apl
 
 ## Principais Pull Requests
 
-- Refatoração da Issue #216
-- Hotfix de configuração local
-- Pipeline GitHub Actions
-- Documentação da arquitetura
-- Documentação de padrões e code smells
-- Documentação final
+| PR | Título | Link |
+|---|---|---|
+| #1 | `refactor(login): resolve dependencies with Autofac` | https://github.com/luccas00/Car-Rental-App/pull/1 |
+| #2 | `chore: ignore environment-specific database configuration` | https://github.com/luccas00/Car-Rental-App/pull/2 |
+| #3 | `ci: add automated build and test workflow` | https://github.com/luccas00/Car-Rental-App/pull/3 |
+| #4 | `docs(architecture): document system architecture` | https://github.com/luccas00/Car-Rental-App/pull/4 |
+| #5 | `docs(quality): document patterns and code smells` | https://github.com/luccas00/Car-Rental-App/pull/5 |
+| #6 | `docs: complete project contribution documentation` | https://github.com/luccas00/Car-Rental-App/pull/6 |
+| #7 | `test(di): add Autofac integration tests` | https://github.com/luccas00/Car-Rental-App/pull/7 |
 
 ## Estratégia de Branches
 
