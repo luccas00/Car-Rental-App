@@ -91,3 +91,31 @@ To finish an existig rent, go the sub-tab "Devolution" and choose an open car re
 ![Register Devolution](https://github.com/Matrix-Developers/Locadora-de-Veiculos/assets/50923316/722650ea-762f-41c8-8bb6-5fdb2d5161c9)
 
 
+## Trabalho Prático – CSI410
+
+Este fork foi utilizado no Trabalho Prático da disciplina **CSI410 – Engenharia de Software II (UFOP)**.
+
+### Integrantes
+
+| Nome | Matrícula | GitHub |
+|------|-----------|--------|
+| Luccas Vinicius | **20.1.8015** | @luccas00 |
+| Davi Zanoti | **24.1.8062** | @DaviZ2399 |
+
+### Issue selecionada
+
+- **#216 – Refactor - Implementar injeção de dependência corretamente para a tela de login**
+
+### Documentação
+
+- `documentacao/arquitetura.md`
+- `documentacao/padroes_e_smells.md`
+- `documentacao/contribuicoes.md`
+- `documentacao/testes_devops.md`
+
+### Melhorias realizadas
+
+- Refatoração utilizando Dependency Injection com Autofac;
+- Documentação da arquitetura e padrões;
+- Pipeline GitHub Actions para build e testes;
+- Organização do fluxo de desenvolvimento utilizando Pull Requests para a branch `DEV`.
