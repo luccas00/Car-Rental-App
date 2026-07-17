@@ -197,7 +197,7 @@ Os testes ORM exigem uma instância SQL Server configurada e acessível.
 
 ## DevOps e CI/CD
 
-## Pipeline implementada
+### Pipeline implementada
 
 Foi adicionada uma pipeline de integração contínua no arquivo:
 
@@ -205,28 +205,53 @@ Foi adicionada uma pipeline de integração contínua no arquivo:
 .github/workflows/dotnet-ci.yml
 ```
 
-A pipeline executa:
+A pipeline é acionada automaticamente em:
+
+- pushes para as branches `DEV` e `main`;
+- Pull Requests direcionados às branches `DEV` e `main`.
+
+Ela executa:
 
 - checkout do repositório;
-- instalação e configuração do .NET;
+- instalação e configuração do .NET 5 e .NET 8;
 - restauração das dependências;
 - build da aplicação Windows Forms;
 - execução dos testes unitários;
-- execução dos testes de aplicação.
+- execução dos testes da camada de aplicação;
+- publicação dos resultados como artefato.
 
-## Situação atual da pipeline
+## Estratégia de execução no CI
 
-A pipeline já foi adicionada e integrada ao repositório.
+A pipeline executa os projetos que não dependem de uma instância externa de SQL Server:
 
-Os novos testes de injeção de dependência ainda serão adicionados ao workflow em uma alteração posterior.
+| Projeto | Quantidade | Execução |
+|---|---:|---|
+| `LocadoraDeVeiculos.UnitTests` | 54 | Local e CI |
+| `LocadoraDeVeiculos.ApplicationTests` | 30 | Local e CI |
+| `LocadoraDeVeiculos.ORMTests` | 42 | Somente local |
+| `LocadoraDeVeiculos.DependencyInjection.Tests` | 6 | Somente local |
 
-A execução da pipeline com esses novos testes também será validada posteriormente no GitHub Actions.
+Assim, a pipeline executa automaticamente 84 testes, enquanto a validação local completa totaliza 132 testes.
+
+## Justificativa para testes locais
+
+Os testes ORM dependem diretamente de uma instância SQL Server configurada.
+
+Os testes de injeção de dependência também possuem dependência indireta do banco. Ao criar a `TelaPrincipalForm`, o construtor carrega o dashboard e consulta dados por meio do `LocacaoAppService`.
+
+No ambiente local, esses testes foram executados com a instância SQL Server configurada e todos foram aprovados.
+
+No runner padrão do GitHub Actions, a instância `SQLEXPRESS` utilizada pela aplicação não está disponível. Por esse motivo, os testes ORM e os testes de injeção de dependência foram mantidos na validação local, enquanto a pipeline executa os testes independentes de infraestrutura.
+
+Essa separação evita resultados falsamente negativos no CI sem remover os testes do projeto.
 
 ## Justificativa DevOps
 
 A pipeline automatiza as verificações de build e testes a cada alteração integrada ao repositório.
 
 Isso reduz o risco de regressões e permite identificar problemas antes que sejam incorporados às branches principais.
+
+A separação entre testes independentes e testes dependentes de infraestrutura mantém o processo de integração contínua confiável e compatível com o ambiente disponível no GitHub Actions.
 
 ## Evidências
 
@@ -235,5 +260,5 @@ As evidências utilizadas na apresentação incluem:
 - execução dos 132 testes no Gerenciador de Testes do Visual Studio;
 - detalhamento dos 6 testes de injeção de dependência;
 - execução dos novos testes pela CLI;
-- histórico da pipeline GitHub Actions;
-- Pull Requests utilizados durante o desenvolvimento.
+- execução da pipeline GitHub Actions;
+- histórico dos Pull Requests utilizados durante o desenvolvimento.
